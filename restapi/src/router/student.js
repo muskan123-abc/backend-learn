@@ -1,19 +1,20 @@
 const express = require("express");
 const router = new express.Router();
-const Student =require("../models/student")
+const Student = require("../models/student");
 // CREATE USER
 router.post("/signup", async (req, res) => {
-  const { email } = req.body;
   try {
+    const { email } = req.body;
     const user = new Student(req.body);
-    const createUser = await user.save();
     const existingUser = await Student.findOne({ email });
     if (existingUser) {
       res.status(400).send({
         message: "existing user",
       });
-    }
+    } 
+    const createUser = await user.save();
     res.status(200).send(createUser);
+
   } catch (e) {
     res.status(400).send(e);
   }
