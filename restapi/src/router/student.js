@@ -2,7 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const Student =require("../models/student")
 // CREATE USER
-router.post("/students", async (req, res) => {
+router.post("/signup", async (req, res) => {
   const { email } = req.body;
   try {
     const user = new Student(req.body);
